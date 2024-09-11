@@ -1,13 +1,23 @@
 [versions]
-agp = "8.5.2"
-kotlin = "1.9.0"
+agp = "8.4.2"
+kotlin = "1.9.23"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
+kotlinxCoroutinesTest = "1.7.3"
 lifecycleRuntimeKtx = "2.8.5"
 activityCompose = "1.9.2"
-composeBom = "2024.04.01"
+composeBom = "2024.09.00"
+mockk = "1.13.12"
+retrofitVersion = "2.9.0"
+hilt = "2.50"
+viewModel= "2.8.5"
+turbineVersion="1.1.0"
+truthVersion="1.4.4"
+roomVersion="2.6.1"
+kspVersion="1.9.0-1.0.13"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -24,8 +34,28 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
+mockk = { group = "io.mockk", name= "mockk", version.ref = "mockk" }
+mockk-android = { group = "io.mockk", name= "mockk-android", version.ref = "mockk" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
+retrofit-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbineVersion" }
+truth = { group = "com.google.truth", name = "truth", version.ref = "truthVersion" }
+
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
+
+
+lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "viewModel"}
+lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "viewModel"}
+lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "viewModel"}
+
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt"  }
+hilt-android-compiler = { group = "com.google.dagger", name= "hilt-android-compiler", version.ref = "hilt"  }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
+hilt-kotlin-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }

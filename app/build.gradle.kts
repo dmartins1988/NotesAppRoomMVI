@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.hilt.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -40,11 +42,20 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.13"
     }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            merges += "META-INF/LICENSE.md"
+            merges += "META-INF/LICENSE-notice.md"
+        }
+    }
+    testOptions {
+        packaging {
+            jniLibs {
+                useLegacyPackaging = true
+            }
         }
     }
 }
@@ -59,11 +70,33 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter)
+
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.lifecycle.runtime.compose)
+
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
+    testImplementation(libs.truth)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.mockk.android)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //Dagger Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
+
+    //Room
+    implementation(libs.room.runtime)
+    ksp(libs.room.compiler)
+    implementation(libs.room.ktx)
 }
