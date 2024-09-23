@@ -51,10 +51,9 @@ object AppModule {
     @Provides
     @Singleton
     fun provideNoteRepository(
-        dao: NoteDao,
-        @IODispatcher ioDispatcher: CoroutineDispatcher
+        dao: NoteDao
     ): NoteRepository {
-        return NoteRepositoryImpl(dao, ioDispatcher)
+        return NoteRepositoryImpl(dao)
     }
 
     @Provides

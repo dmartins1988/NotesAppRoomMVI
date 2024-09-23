@@ -6,8 +6,10 @@ import com.example.notesroommvi.domain.model.Note
 import com.example.notesroommvi.domain.repository.NoteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,7 +20,13 @@ class NoteViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(NoteState())
-    val state: StateFlow<NoteState> = _state.asStateFlow()
+    val state: StateFlow<NoteState> = _state.onStart {
+        dispatchIntent(NoteIntent.GetNotes)
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000L),
+        NoteState()
+    )
 
     fun dispatchIntent(intent: NoteIntent) {
         when (intent) {
